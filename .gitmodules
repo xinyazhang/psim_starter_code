@@ -1,0 +1,18 @@
+[submodule "third-party/glfw"]
+	path = third-party/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "third-party/imgui"]
+	path = third-party/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "third-party/libigl"]
+	path = third-party/libigl
+	url = https://github.com/libigl/libigl.git
+[submodule "third-party/libigl-imgui"]
+	path = third-party/libigl-imgui
+	url = https://github.com/libigl/libigl-imgui.git
+[submodule "third-party/pybind11"]
+	path = third-party/pybind11
+	url = https://github.com/pybind/pybind11.git
+[submodule "third-party/tetgen"]
+	path = third-party/tetgen
+	url = https://github.com/jdumas/tetgen

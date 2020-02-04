@@ -1,0 +1,5 @@
+lsdir(subs ${CMAKE_CURRENT_LIST_DIR})
+message(STATUS "subs ${subs}")
+foreach(sub ${subs})
+	add_subdirectory(${sub})
+endforeach()
