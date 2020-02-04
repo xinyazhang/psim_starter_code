@@ -1,6 +1,6 @@
 # Introduction to Physical Simulation Project Starter Code
 
-## Preamble 
+## Preamble
 
 We are going to use the same monolithic git repository to development all your
 physical simulation code, and the following instructions applies to all your
@@ -32,6 +32,9 @@ change directory to `psim/bin/`, and run `./goo1.py` for your implementation.
 and `./reference_goo1.py` for the reference implementation.
 
 `bin/reference` contains the reference solution.
+
+In addition, `bin/demo_test_goo1.py` demonstrates how to run the simulation
+without GUI. Therefore you can test your code on Lab machines remotely.
 
 ## Quick start to write your simulation code
 
