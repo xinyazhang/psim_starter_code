@@ -16,3 +16,6 @@
 [submodule "third-party/tetgen"]
 	path = third-party/tetgen
 	url = https://github.com/jdumas/tetgen
+[submodule "bin/reference"]
+	path = bin/reference
+	url = git@github.com:xinyazhang/psim_reference.git

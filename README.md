@@ -6,7 +6,7 @@ We are going to use the same monolithic git repository to development all your
 physical simulation code, and the following instructions applies to all your
 projects.
 
-## Build Instruction
+## General Build Instruction
 
 This is a standard cmake project, with a few bundled git modules.
 To build this project, run:
@@ -26,7 +26,9 @@ Afterwards, you can run `./goo1.py` under the `psim/bin` directory.
 Note: this script must be run at `psim/bin`, otherwise it cannot find the
 compiled module.
 
-## Test your build
+## Goo1 Project Instructions
+
+### Test your build
 
 change directory to `psim/bin/`, and run `./goo1.py` for your implementation.
 and `./reference_goo1.py` for the reference implementation.
@@ -36,11 +38,22 @@ and `./reference_goo1.py` for the reference implementation.
 In addition, `bin/demo_test_goo1.py` demonstrates how to run the simulation
 without GUI. Therefore you can test your code on Lab machines remotely.
 
-## Quick start to write your simulation code
+### Quick start to write your simulation code
 
 The starter code contains all essential code for visualization. All you need
 to do is to fill up the `// TODO ` sections inside `lib/core/goo1/GooCore.cpp`
 and its header file `lib/core/goo1/GooCore.cpp`.
+
+## Goo2 Project Instructions
+
+### Update your source code to goo2
+
+`git pull --rebase` will add `goo2` starter code to your project.
+Be aware you might need to commit changes to your local git repository.
+
+### Development
+
+The development instructions are similar to Project Goo1 , except for the `goo1` have to be replaced with `goo2`.
 
 ## Brief introduction to the code structure
 

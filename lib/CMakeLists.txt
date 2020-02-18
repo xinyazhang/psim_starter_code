@@ -24,7 +24,7 @@ endif ()
 #
 # Create the library
 #
-add_library(psim SHARED ${PSIM_SRC} ${PSIM_VIS_SRC})
+add_library(psim STATIC ${PSIM_SRC} ${PSIM_VIS_SRC})
 target_include_directories(psim BEFORE PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(psim PUBLIC psim_std_dep)
 
