@@ -1,5 +1,6 @@
 #include "PhysicsHook.h"
 #include <core/PhysicsCore.h>
+#include <iostream>
 
 PhysicsHook::PhysicsHook(PhysicsCore* core)
 	: core_(core)
@@ -33,7 +34,9 @@ void
 PhysicsHook::renderRenderGeometry(igl::opengl::glfw::Viewer &viewer)
 {
 	viewer.data().clear();
-	viewer.data().set_mesh(renderQ_, renderF_);
+    if (renderQ_.rows() > 0 && renderF_.rows() > 0) {
+        viewer.data().set_mesh(renderQ_, renderF_);
+    }
 	if (renderC_.size() > 0)
 		viewer.data().set_colors(renderC_);
 	render_data_dirty_ = false;

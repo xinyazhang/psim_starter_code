@@ -10,7 +10,7 @@ namespace goo2 {
 
 void define_module(py::module& m)
 {
-	py::class_<SimParameters, std::shared_ptr<SimParameters> > SimP(m, "SimParameters");
+	py::class_<SimParameters, std::shared_ptr<SimParameters> > SimP(m, "SimParameters", py::module_local());
 
 	SimP.def(py::init<>())
 	    .def_readwrite("timeStep", &SimParameters::timeStep)
@@ -40,19 +40,19 @@ void define_module(py::module& m)
 	    .def_readwrite("rodSegments", &SimParameters::rodSegments)
 	;
 
-	py::enum_<SimParameters::ConstraintHandling>(SimP, "ConstraintHandling")
+	py::enum_<SimParameters::ConstraintHandling>(SimP, "ConstraintHandling", py::module_local())
 		.value("CH_PENALTY", SimParameters::ConstraintHandling::CH_PENALTY)
 		.value("CH_STEPPROJECT", SimParameters::ConstraintHandling::CH_STEPPROJECT)
 		.value("CH_LAGRANGEMULT", SimParameters::ConstraintHandling::CH_LAGRANGEMULT)
 		.export_values();
 
-	py::enum_<SimParameters::ConnectorType>(SimP, "ConnectorType")
+	py::enum_<SimParameters::ConnectorType>(SimP, "ConnectorType", py::module_local())
 		.value("CT_SPRING", SimParameters::ConnectorType::CT_SPRING)
 		.value("CT_RIGIDROD", SimParameters::ConnectorType::CT_RIGIDROD)
 		.value("CT_FLEXROD", SimParameters::ConnectorType::CT_FLEXROD)
 		.export_values();
 
-	py::class_<Particle>(m, "Particle")
+	py::class_<Particle>(m, "Particle", py::module_local())
 		.def_readonly("pos", &Particle::pos)
 		.def_readonly("vel", &Particle::vel)
 		.def_readonly("mass", &Particle::mass)
@@ -61,7 +61,7 @@ void define_module(py::module& m)
 		.def_readonly("uid", &Particle::uid)
 	;
 
-	py::class_<GooCore, PhysicsCore>(m, "GooCore")
+	py::class_<GooCore, PhysicsCore, std::shared_ptr<GooCore>>(m, "GooCore", py::module_local())
 		.def(py::init<>())
 		.def("add_particle", &GooCore::addParticle)
 		.def("add_saw", &GooCore::addSaw)
@@ -71,7 +71,7 @@ void define_module(py::module& m)
 		.def("reference_sim_parameters", &GooCore::getPointerToSimParameters)
 		;
 #if PSIM_ENABLE_VISUALIZER
-	py::class_<GooVisualizer, IglVisualizer>(m, "GooVisualizer")
+	py::class_<GooVisualizer, IglVisualizer>(m, "GooVisualizer", py::module_local())
 		.def(py::init<>())
 		;
 #endif

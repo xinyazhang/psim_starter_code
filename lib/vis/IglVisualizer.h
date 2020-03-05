@@ -21,14 +21,14 @@ public:
     IglVisualizer()
     {
     }
-    
+
     void init(PhysicsCore* core, PhysicsHook* hook)
     {
         core_ = core;
         hook_ = hook;
 
 	setupViewer();
-        
+
         viewer_.callback_key_pressed = [=](Viewer& viewer, unsigned int key, int mod) {
             return this->keyCallback(viewer, key, mod);
         };
@@ -88,13 +88,12 @@ public:
     virtual bool mouseCallback(Viewer& viewer, int button, int modifier)
     {
         if (!hook_)
-            return true;
+            return false;
 
         Eigen::Vector3f pos(viewer.down_mouse_x, viewer.down_mouse_y, 0);
         Eigen::Matrix4f model = viewer.core().view;
         Eigen::Vector3f unproj = igl::unproject(pos, model, viewer.core().proj, viewer.core().viewport);
         hook_->mouseClicked(unproj[0], -unproj[1], button);
-
         return true;
     }
 

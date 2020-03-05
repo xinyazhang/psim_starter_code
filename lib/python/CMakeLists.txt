@@ -16,9 +16,21 @@ else ()
 	target_compile_definitions(pypsim PUBLIC PSIM_ENABLE_VISUALIZER=0)
 endif ()
 
+# A reference module for grading
+option(PSIM_BUILD_SEPARARE_PYPSIM_REF "Build the a separate pypsim_ref module to avoid naming confliction" OFF)
+if (PSIM_BUILD_SEPARARE_PYPSIM_REF)
+	pybind11_add_module(pypsim_ref ${PYPSIM_SRC})
+	target_include_directories(pypsim_ref BEFORE PRIVATE ${CMAKE_CURRENT_LIST_DIR}/..)
+	target_link_libraries(pypsim_ref PUBLIC psim)
+	target_compile_definitions(pypsim_ref PUBLIC PYTHON_MODULE_NAME=pypsim_ref)
+endif()
+
 foreach(sub ${subs})
 	string(TOUPPER "${sub}" item)
 	target_compile_definitions(pypsim PUBLIC PSIM_HAS_${item})
+	if (PSIM_BUILD_SEPARARE_PYPSIM_REF)
+		target_compile_definitions(pypsim_ref PUBLIC PSIM_HAS_${item})
+	endif()
 endforeach()
 
 set_relative_rpath(pypsim)

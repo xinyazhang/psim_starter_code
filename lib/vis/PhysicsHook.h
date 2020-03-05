@@ -12,7 +12,7 @@ class PhysicsCore;
 
 /*
  * PhysicsHook
- * 
+ *
  * The Interface of shim classes between igl::Viewer and the PhysicsCore
  */
 class PhysicsHook

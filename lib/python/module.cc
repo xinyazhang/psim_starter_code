@@ -4,6 +4,10 @@
 #include <pybind11/eigen.h>
 namespace py = pybind11;
 
+#ifndef PYTHON_MODULE_NAME
+#define PYTHON_MODULE_NAME pypsim
+#endif
+
 #include <core/PhysicsCore.h>
 #if PSIM_ENABLE_VISUALIZER
 #include <vis/IglVisualizer.h>
@@ -17,19 +21,19 @@ namespace py = pybind11;
 #include "goo2/goo2.h"
 #endif
 
-#ifdef PSIM_HAS_SEVEN1
-#include "seven1/seven1.h"
+#ifdef PSIM_HAS_BIRD1
+#include "bird1/bird1.h"
 #endif
 
-PYBIND11_MODULE(pypsim, m) {
+PYBIND11_MODULE(PYTHON_MODULE_NAME, m) {
 	m.doc() = "Core of Phyisical Simulation";
 
-	py::class_<PhysicsCore>(m, "PhysicsCore")
+	py::class_<PhysicsCore, std::shared_ptr<PhysicsCore>>(m, "PhysicsCore", py::module_local())
 		.def("init_simulation", &PhysicsCore::initSimulation)
 		.def("simulate_one_step", &PhysicsCore::simulateOneStep)
 		;
 #if PSIM_ENABLE_VISUALIZER
-	py::class_<IglVisualizer>(m, "IglVisualizer")
+	py::class_<IglVisualizer>(m, "IglVisualizer", py::module_local())
 		.def(py::init<>())
 		.def("init", &IglVisualizer::init)
 		.def("run", &IglVisualizer::run)
@@ -46,8 +50,8 @@ PYBIND11_MODULE(pypsim, m) {
 	goo2::define_module(goo2m);
 #endif
 
-#ifdef PSIM_HAS_SEVEN1
-	py::module seven1m = m.def_submodule("seven1", "Goo2 project");
-	seven1::define_module(seven1m);
+#ifdef PSIM_HAS_BIRD1
+	py::module bird1m = m.def_submodule("bird1", "Bird1 project");
+	bird1::define_module(bird1m);
 #endif
 }
