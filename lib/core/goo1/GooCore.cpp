@@ -1,5 +1,7 @@
 #include "GooCore.h"
 #include <Eigen/Sparse>
+#include <algorithm>
+#include <iostream>
 
 using namespace Eigen;
 
