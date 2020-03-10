@@ -15,10 +15,8 @@ RigidBodyTemplate::RigidBodyTemplate(Eigen::Ref<Eigen::MatrixX3d> V,
                                      double scale) : volume_(0), radius_(0)
 {
     inertiaTensor_.setZero();
-    this->V = V;
+    this->V = V * scale;
     this->F = F;
-
-    V *= scale;
 
     initialize();
 }
