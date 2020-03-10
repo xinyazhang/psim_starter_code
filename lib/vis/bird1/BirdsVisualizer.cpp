@@ -62,7 +62,9 @@ bool BirdsVisualizer::drawGUI()
     if (ImGui::Button("Load Scene")) {
         auto fn = igl::file_dialog_open();
         if (!fn.empty()) {
+            hook_->beginLoadScene();
             load_scene(fn);
+            hook_->endLoadScene();
             initScene();
         }
     }

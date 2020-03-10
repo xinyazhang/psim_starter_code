@@ -14,6 +14,8 @@ public:
 
     virtual void drawGUI(igl::opengl::glfw::imgui::ImGuiMenu &menu) override;
     
+    void beginLoadScene() { render_mutex.lock(); }
+    void endLoadScene() { render_mutex.unlock(); }
 private:
     SimParameters& params_;
 };
