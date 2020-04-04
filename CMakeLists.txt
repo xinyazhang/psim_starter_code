@@ -6,6 +6,13 @@ set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 set (CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 
+option(USE_ADDRESS_SANITIZER "Enable address sanitiezr when CMAKE_BUILD_TYPE is Debug" OFF)
+
+if (USE_ADDRESS_SANITIZER)
+	set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+	set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+endif()
+
 include(ExternalProject)
 set(EXTERNAL_PROJECTS_PREFIX ${CMAKE_BINARY_DIR}/external)
 set(EXTERNAL_PROJECTS_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/installed)
@@ -30,6 +37,7 @@ find_package(Eigen3 REQUIRED NO_MODULE)
 add_library(psim_std_dep INTERFACE)
 target_link_libraries(psim_std_dep INTERFACE Eigen3::Eigen Threads::Threads)
 
+add_subdirectory(third-party/tetgen/)
 add_subdirectory(lib)
 
 if (PSIM_ENABLE_VISUALIZER)
