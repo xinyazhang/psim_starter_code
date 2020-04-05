@@ -225,9 +225,9 @@ BirdsCore::addInstances(std::shared_ptr<RigidBodyTemplate> rbt,
         int base = 1;
         c << Qs(i, base + 0), Qs(i, base + 1), Qs(i, base + 2);
         base += 3;
-        cvel << Qs(i, base + 0), Qs(i, base + 1), Qs(i, base + 2);
-        base += 3;
         theta << Qs(i, base + 0), Qs(i, base + 1), Qs(i, base + 2);
+        base += 3;
+        cvel << Qs(i, base + 0), Qs(i, base + 1), Qs(i, base + 2);
         base += 3;
         w << Qs(i, base + 0), Qs(i, base + 1), Qs(i, base + 2);
         ret(i) = addSingleInstance(rbt, density, c, theta, cvel, w);
