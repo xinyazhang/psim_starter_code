@@ -158,6 +158,11 @@ AABBNode* buildAABB(const RigidBodyInstance* instance)
     return buildAABB(leaves);
 }
 
+void freeAABB(AABBNode* aabb)
+{
+    delete aabb;
+}
+
 bool vertInTet(const Eigen::Vector3d& p,
                const Eigen::Vector3d& q1,
                const Eigen::Vector3d& q2,

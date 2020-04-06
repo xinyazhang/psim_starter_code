@@ -21,6 +21,8 @@ RigidBodyInstance::RigidBodyInstance(const RigidBodyTemplate &rbtemplate,
 
 RigidBodyInstance::~RigidBodyInstance()
 {    
+    freeAABB(AABB);
+    AABB = nullptr;
 }
 
 }

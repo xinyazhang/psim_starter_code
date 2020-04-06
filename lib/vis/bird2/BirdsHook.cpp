@@ -18,6 +18,8 @@ BirdsHook::BirdsHook(BirdsCore *core)
 
 BirdsHook::~BirdsHook()
 {
+    killSimThread();
+    bird_.reset();
 }
     
 void BirdsHook::tick()

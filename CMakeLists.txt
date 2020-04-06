@@ -7,10 +7,18 @@ set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 set (CMAKE_BUILD_RPATH_USE_ORIGIN TRUE)
 
 option(USE_ADDRESS_SANITIZER "Enable address sanitiezr when CMAKE_BUILD_TYPE is Debug" OFF)
+option(USE_ADDRESS_SANITIZER_RELEASE "Enable address sanitiezr in Release mode" OFF)
 
 if (USE_ADDRESS_SANITIZER)
 	set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 	set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+endif()
+
+if (USE_ADDRESS_SANITIZER_RELEASE)
+	set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -fno-omit-frame-pointer -fsanitize=address")
+	set (CMAKE_LINKER_FLAGS_RELEASE "${CMAKE_LINKER_FLAGS_RELEASE} -fno-omit-frame-pointer -fsanitize=address")
+	set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -fno-omit-frame-pointer -fsanitize=address")
+	set (CMAKE_LINKER_FLAGS_RELWITHDEBINFO "${CMAKE_LINKER_FLAGS_RELWITHDEBINFO} -fno-omit-frame-pointer -fsanitize=address")
 endif()
 
 include(ExternalProject)

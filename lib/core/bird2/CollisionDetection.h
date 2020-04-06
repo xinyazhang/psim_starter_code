@@ -40,6 +40,7 @@ bool vertInTet(const Eigen::Vector3d& p,
                const Eigen::Vector3d& q4);
 std::set<Collision> collisionDetection(std::vector<std::shared_ptr<RigidBodyInstance>>& instances);
 AABBNode* buildAABB(const RigidBodyInstance* instance);
+void freeAABB(AABBNode*);
 
 }
 
