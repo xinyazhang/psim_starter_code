@@ -153,7 +153,8 @@ bool BirdsCore::simulateOneStep()
         {
             Vector3d term1 = (-VectorMath::TMatrix(-params_->timeStep*newwguess).inverse() * VectorMath::TMatrix(oldthetas[bodyidx])).transpose() * Mi * body.density * newwguess;
             Vector3d term2 = (VectorMath::TMatrix(params_->timeStep*body.w).inverse()*VectorMath::TMatrix(oldthetas[bodyidx])).transpose() * Mi * body.density * body.w;
-            Vector3d fval = term1 + term2;
+            Vector3d term3 = params_->timeStep * thetaForce.segment<3>(3*bodyidx);
+            Vector3d fval = term1 + term2 + term3;
             if(fval.norm() / body.density / Mi.trace() <= params_->NewtonTolerance)
                 break;
 
