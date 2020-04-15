@@ -29,6 +29,10 @@ namespace py = pybind11;
 #include "bird2/bird2.h"
 #endif
 
+#ifdef PSIM_HAS_CLOTH1
+#include "cloth1/cloth1.h"
+#endif
+
 PYBIND11_MODULE(PYTHON_MODULE_NAME, m) {
 	m.doc() = "Core of Phyisical Simulation";
 
@@ -62,5 +66,10 @@ PYBIND11_MODULE(PYTHON_MODULE_NAME, m) {
 #ifdef PSIM_HAS_BIRD2
 	py::module bird2m = m.def_submodule("bird2", "Bird2 project");
 	bird2::define_module(bird2m);
+#endif
+
+#ifdef PSIM_HAS_CLOTH1
+	py::module cloth1m = m.def_submodule("cloth1", "Cloth1 project");
+	cloth1::define_module(cloth1m);
 #endif
 }
