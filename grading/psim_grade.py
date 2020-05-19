@@ -10,8 +10,9 @@ import json
 def parse_args():
     p = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     p.add_argument('paths', help='Directories of pysim modules', nargs='+')
-    p.add_argument('--case', help='Grading cases', choices=['goo1', 'goo2'], default='goo1')
+    p.add_argument('--case', help='Grading cases', choices=['goo1', 'goo2', 'bird1', 'bird2', 'cloth1'], default='goo1')
     p.add_argument('--store', help='Store the grading results to the same directory of the pysim module', action='store_true')
+    p.add_argument('--store_to', help='Change the file name to store the gradings', default='grading.json')
     p.add_argument('--target_module_name', default='pypsim')
     p.add_argument('-k', help='Select specific test', default='')
     p.add_argument('--verbose', help='Show the details of partial credited items', action='store_true')
@@ -40,7 +41,7 @@ def main():
         print(f"Overall {total_pts}/100")
         if args.store:
             sav = { 'Points': dic, 'TotalPoints': ttl_dic, 'OVERALL': total_pts }
-            with open(f'{p}/grading.json', 'w') as f:
+            with open(f'{p}/{args.store_to}', 'w') as f:
                 json.dump(sav, fp=f)
         del(submission_module)
 
